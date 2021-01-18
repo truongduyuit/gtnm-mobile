@@ -12,10 +12,16 @@ import {
 import {Input, SearchBar, Icon, Button} from 'react-native-elements';
 
 export default function BottomModal (props) {
+  const SetScreenDelivery = async (screen, status) => {
+    props.handlerScreen(screen)
+    props.handlerStatus(status)
+    console.log("screen", screen)
+    console.log("status", status)
+  }
   return (
     <View
       style={{
-        flex: 5,
+        flex: 8,
         background: '#fff',
         margin: 3,
         borderRadius: 5,
@@ -24,13 +30,23 @@ export default function BottomModal (props) {
       }}
     >
       <Button
+          title="Change delivery time"
+          type="clear"
+          onPress={() => SetScreenDelivery('ChangeDelivery', 'time') }
+        />
+        <Button
+          title="Change delivery place"
+          type="clear"
+          onPress={() => SetScreenDelivery('ChangeDelivery', 'place')}
+        />
+      <Button
           title="View"
           type="clear"
-          onPress={() => props.handler ('Detail')}
+          onPress={() => props.handlerScreen ('Detail')}
         />
-        <Button title="Edit" type="clear" />
-        <Button title="Delete" type="clear" />
-        <Button title="Create new from this Customer" type="clear" />
+        <Button title="Edit" type="clear" onPress={() => props.handlerScreen ('Detail')}/>
+        <Button title="Delete" type="clear" onPress={() => props.handlerScreen ('Statistical')}/>
+        <Button title="Create new from this Customer" type="clear" onPress={() => props.handlerScreen ('Sale')}/>
     </View>
   );
 }

@@ -8,6 +8,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   ScrollView,
+  Dimensions,SafeAreaView
 } from 'react-native';
 import {Input, SearchBar, Icon, Button} from 'react-native-elements';
 import {
@@ -26,119 +27,127 @@ import {
 } from 'react-native-modals';
 
 import BottomModal from './BottomModal';
+const {width ,height } = Dimensions.get('window')
 
-const data = {
+let dataOrigin = {
   tableHead: ['Code', 'Customer Name', 'PostImg Date', 'Amount', 'Status'],
   tableData: [
-    ['DH001', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH002', 'Noo PT', '22/1/2020', '100 $', 2],
-    ['DH003', 'Noo PT', '22/1/2020', '100 $', 3],
-    ['DH004', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH001', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH002', 'Noo PT', '22/1/2020', '100 $', 2],
-    ['DH003', 'Noo PT', '22/1/2020', '100 $', 3],
-    ['DH004', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH001', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH002', 'Noo PT', '22/1/2020', '100 $', 2],
-    ['DH003', 'Noo PT', '22/1/2020', '100 $', 3],
-    ['DH004', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH001', 'Noo PT', '22/1/2020', '100 $', 1],
-    ['DH002', 'Noo PT', '22/1/2020', '100 $', 2],
-    ['DH003', 'Noo PT', '22/1/2020', '100 $', 3],
-    ['DH004', 'Noo PT', '22/1/2020', '100 $', 1],
+    ['DH001', 'Noo PT1', '22/1/2020', '100 $', 1],
+    ['DH002', 'Noo PT2', '22/1/2020', '2000 $', 2],
+    ['DH003', 'Noo PT3', '22/1/2020', '100 $', 3],
+    ['DH004', 'Noo PT4', '22/1/2020', '100 $', 1],
+    ['DH001', 'Noo PT5', '22/1/2020', '100 $', 1],
+    ['DH002', 'Noo PT6', '22/1/2020', '100 $', 2],
+    ['DH003', 'Noo PT7', '22/1/2020', '100 $', 3],
+    ['DH004', 'Noo PT8', '22/1/2020', '100 $', 1],
+    ['DH001', 'Noo PT9', '22/1/2020', '100 $', 1],
+    ['DH002', 'Noo PT1', '22/1/2020', '100 $', 2],
+    ['DH003', 'Noo PT2', '22/1/2020', '100 $', 3],
+    ['DH004', 'Noo PT3', '22/1/2020', '100 $', 1],
+    ['DH001', 'Noo PT4', '22/1/2020', '100 $', 1],
+    ['DH002', 'Noo PT5', '22/1/2020', '100 $', 2],
+    ['DH003', 'Noo PT6', '22/1/2020', '100 $', 3],
+    ['DH004', 'Noo PT7', '22/1/2020', '100 $', 1],
   ],
 };
 
-function ModalFilter (props) {
-  return (
-    <Modal
-      visible={props.visible}
-      onTouchOutside={() => props.handler (false)}
-      height={430}
-      width={300}
-      modalTitle={<ModalTitle title="Filter" />}
-      footer={
-        <ModalFooter>
-
-          <ModalButton text="OK" onPress={() => props.handler (false)} />
-        </ModalFooter>
-      }
-    >
-      <ModalContent>
-        <Text style={{fontWeight: 'bold', marginLeft: 10}}>Code</Text>
-        <Input
-          style={{
-            borderWidth: 1,
-            borderColor: '#c8e1ff',
-            backgroundColor: '#fff',
-            paddingLeft: 10,
-          }}
-          value="DH001"
-        />
-        <Text style={{fontWeight: 'bold'}}>Customer Name</Text>
-        <Input
-          style={{
-            borderWidth: 1,
-            borderColor: '#c8e1ff',
-            backgroundColor: '#fff',
-            paddingLeft: 10,
-          }}
-          value="Chung Nguyễn Trường Duy"
-        />
-        <Text style={{fontWeight: 'bold'}}>Amount</Text>
-        <Input
-          style={{
-            borderWidth: 1,
-            borderColor: '#c8e1ff',
-            backgroundColor: '#fff',
-            paddingLeft: 10,
-          }}
-          value="2000"
-        />
-        <View style={{flexDirection: 'row'}}>
-          <Button
-            icon={<Icon name="remove" size={20} color="blue" />}
-            type="outline"
-          />
-          <Button
-            icon={<Icon name="add" size={20} color="blue" />}
-            type="outline"
-          />
-        </View>
-
-        {/* <TextInput
-          style={{
-            flex: 1,
-            borderWidth: 1,
-            borderColor: '#c8e1ff',
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            paddingLeft: 10,
-          }}
-          value="uit.truongduy@gmail.com"
-          textAlign={'left'}
-        /> */}
-      </ModalContent>
-    </Modal>
-  );
+function handlerFilter(option) {
+  let dataTemp = [...data.tableData].filter(item => item[4].split(" ")[0] === option.amount)
 }
+
 
 export default function ListOrderScreen (props) {
   const [isOpenFilterModal, setIsOpenFilterModal] = useState (false);
   const [isOpenFilter, setIsOpenFilter] = useState (false);
   const [search, setSearch] = useState ('');
   const [enableKeyboard, setEnableKeyboard] = useState (true);
+  const [data, setData] = useState(dataOrigin)
+  const [amount, setAmount] = useState(0)
+  const ModalFilter = (props) => {
+    return (
+      <Modal
+        visible={props.visible}
+        onTouchOutside={() => props.handler (false)}
+        height={430}
+        width={300}
+        modalTitle={<ModalTitle title="Filter" />}
+        footer={
+          <ModalFooter>
+            <ModalButton text="OK" onPress={() => props.handler (false)} />
+          </ModalFooter>
+        }
+      >
+        <ModalContent>
+          <Text style={{fontWeight: 'bold', marginLeft: 10}}>Code</Text>
+          <Input
+            style={{
+              borderWidth: 1,
+              borderColor: '#c8e1ff',
+              backgroundColor: '#fff',
+              paddingLeft: 10,
+            }}
+            value=""
+          />
+          <Text style={{fontWeight: 'bold'}}>Customer Name</Text>
+          <Input
+            style={{
+              borderWidth: 1,
+              borderColor: '#c8e1ff',
+              backgroundColor: '#fff',
+              paddingLeft: 10,
+            }}
+            value=""
+          />
+          <Text style={{fontWeight: 'bold'}}>Amount</Text>
+          <Input
+            style={{
+              borderWidth: 1,
+              borderColor: '#c8e1ff',
+              backgroundColor: '#fff',
+              paddingLeft: 10,
+            }}
+            value={amount + ""}
+          />
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <Button
+              icon={<Icon name="remove" size={20} color="blue" onPress={() => alert("-")}/>}
+              type="outline"
+            />
+            <View style={{margin: 5}}></View>
+            <Button
+              icon={<Icon name="add" size={20} color="blue" onPress={() => alert("+")} />}
+              type="outline"
+            />
+          </View>
+        </ModalContent>
+      </Modal>
+    );
+  }
+
+  const handlerSearch = (value) => {
+    setSearch(value)
+
+    if (value.length > 0) {
+      let dataTemp = [...dataOrigin.tableData]
+      const newTableData = dataTemp.filter(item => item[0].toLowerCase().indexOf(value.toLowerCase()) !== -1 || item[1].toLowerCase().indexOf(value.toLowerCase()) !== -1 || item[3].toLowerCase().indexOf(value.toLowerCase()) !== -1)
+      setData({...data, tableData: newTableData})
+    } else {
+      setData(dataOrigin)
+    }
+  }
 
   return (
-    <View
+    <View 
       style={{
         flex: 1,
+        height:height
       }}
     >
       {/* navigation */}
       <View
         style={{
           flex: 1,
+          height:height/10,
           flexDirection: 'row',
           marginTop: 30,
         }}
@@ -224,9 +233,9 @@ export default function ListOrderScreen (props) {
                 borderBottomRightRadius: search.length > 0 ? 0 : 10,
               }}
               placeholder="Search..."
-              onChangeText={text => setSearch (text)}
+              onChangeText={text => handlerSearch(text)}
               value={search}
-              underlineColorAndroid="transparent"
+              onPress={() => setEnableKeyboard(false)}
             />
             {search.length > 0
               ? <Button
@@ -275,7 +284,7 @@ export default function ListOrderScreen (props) {
         <View
           style={{
             flex: 1,
-            marginTop: 5,
+            marginTop: 3,
             borderRadius: 3,
           }}
         >
@@ -283,7 +292,7 @@ export default function ListOrderScreen (props) {
             icon={<Icon name="ios-cart" type="ionicon" color="#00CCCC" />}
             title=""
             type="clear"
-            onPress={() => setIsOpenFilterModal (true)}
+            onPress={() => props.handlerScreen ('Sale')}
           />
         </View>
       </View>
@@ -349,7 +358,7 @@ export default function ListOrderScreen (props) {
         </Table>
 
       </View>
-      {isOpenFilterModal ? <BottomModal handler={props.handler} /> : <View />}
+      {isOpenFilterModal ? <BottomModal handlerScreen={props.handlerScreen} handlerStatus={props.handlerStatus}/> : <View />}
       <ModalFilter
         visible={isOpenFilter}
         handler={value => setIsOpenFilter (value)}

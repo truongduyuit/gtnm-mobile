@@ -33,9 +33,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="Chung Nguyễn Trường Duy"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -50,9 +52,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="0342525123"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -67,9 +71,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="uit.truongduy@gmail.com"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -84,9 +90,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="Cash"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -101,9 +109,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="20 $"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -118,9 +128,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="2000 $"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -135,9 +147,11 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="Waiting to involce"
               textAlign={'left'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -152,11 +166,13 @@ export default class DetailHeader extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingLeft: 10,
+                color: "#000"
               }}
               value="Giao hàng trong giờ hành chính"
               textAlign={'left'}
               multiline= {true}
               numberOfLines={3}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
         </View>

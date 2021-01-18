@@ -47,10 +47,9 @@ export default function DetailOrderScreen (props) {
             justifyContent: 'flex-start',
             alignItems: 'center',
           }}
-          
         >
           <Icon name="ios-arrow-back" type="ionicon" color="blue" />
-          <Text onPress = {() => props.handler("List")} style={{color: 'blue', padding: 5, fontSize: 20}}>Back</Text>
+          <Text onPress = {() => props.handlerScreen("List")} style={{color: 'blue', padding: 5, fontSize: 20}}>Back</Text>
         </View>
         <View
           style={{

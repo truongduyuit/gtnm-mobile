@@ -20,18 +20,18 @@ const data = {
     'Total',
   ],
   tableData: [
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
-    ['T-Shirt', 'Yellow', '10', 'Unit', '20000 đ', '10', 0, 180000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
+    ['T-Shirt', 'Yellow', '10', 'Unit', '2000 $', '10', 0, 20000],
   ],
 };
 
@@ -97,9 +97,12 @@ export default class DetailLines extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingRight: 8,
+                color: "#000"
               }}
-              value="20000 $"
+              
+              value="200000 $"
               textAlign={'right'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -113,9 +116,11 @@ export default class DetailLines extends Component {
                 backgroundColor: '#fff',
                 borderRadius: 10,
                 paddingRight: 8,
+                color: "#000"
               }}
-              value="20000 $"
+              value="0 $"
               textAlign={'right'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
 
@@ -131,9 +136,11 @@ export default class DetailLines extends Component {
                 borderRadius: 10,
                 backgroundColor: '#fff',
                 paddingRight: 8,
+                color: "#000"
               }}
-              value="20000 $"
+              value="200000 $"
               textAlign={'right'}
+              editable={false} selectTextOnFocus={false}
             />
           </View>
         </View>
