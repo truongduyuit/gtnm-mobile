@@ -30,12 +30,12 @@ export default function BottomModal (props) {
       }}
     >
       <Button
-          title="Change delivery time"
+          title="Change delivery place"
           type="clear"
           onPress={() => SetScreenDelivery('ChangeDelivery', 'time') }
         />
         <Button
-          title="Change delivery place"
+          title="Change delivery time"
           type="clear"
           onPress={() => SetScreenDelivery('ChangeDelivery', 'place')}
         />
