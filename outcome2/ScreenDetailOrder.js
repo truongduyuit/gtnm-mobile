@@ -120,7 +120,7 @@ export default function DetailOrderScreen (props) {
         }}
       >
         <View style={{flex: 1, marginLeft: 20}}>
-          <Icon name="ios-add-circle" type="ionicon" color="#fff" />
+          <Icon name="ios-add-circle" type="ionicon" color="#fff" onPress={() => props.handlerScreen('Sale')}/>
         </View>
 
         <View style={{flex: 1}}>

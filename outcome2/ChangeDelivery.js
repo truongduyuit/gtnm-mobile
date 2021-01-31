@@ -46,6 +46,7 @@ export default function ChangeDelivery (props) {
     const [beginDate, setBeginDate] = useState (date);
     const [isOpenModal, setIsOpenModal] = useState (false);
     const [message, setMessage] = useState("")
+    const [currAddress, setCurrAddress] = useState("Huyện Cẩm mỹ - Tỉnh đồng Nai")
 
     const updatePress = () => {
         setIsOpenModal(true)
@@ -174,7 +175,7 @@ export default function ChangeDelivery (props) {
                         editable={false}
                         />
 
-                        <Icon name="ios-swap" size={50} type="ionicon" color="blue" style={{marginTop: 20}}/>
+                        <Icon name="ios-swap" size={50} type="ionicon" color="blue" style={{marginTop: 20, transform: [{ rotate: '90deg'}]}}/>
 
                         <Text style={{
                             marginLeft: 20,
@@ -193,7 +194,8 @@ export default function ChangeDelivery (props) {
                                 marginRight: 20,
                                 marginTop: 10
                             }}
-                        value="Huyện Cẩm mỹ - Tỉnh đồng Nai"
+                        value={currAddress}
+                        onChangeText= {(e) => setCurrAddress(e)}
                         textAlign={'left'}
                         multiline= {true}
                         numberOfLines={3}
@@ -246,7 +248,7 @@ export default function ChangeDelivery (props) {
                             disabled
                         />
 
-                        <Icon name="ios-swap" size={50} type="ionicon" color="blue" style={{marginTop: 20}}/>
+                        <Icon name="ios-swap" size={50} type="ionicon" color="blue" style={{marginTop: 20, transform: [{ rotate: '90deg'}]}}/>
 
                         <Text style={{
                             marginLeft: 20,

@@ -55,7 +55,6 @@ function handlerFilter(option) {
   let dataTemp = [...data.tableData].filter(item => item[4].split(" ")[0] === option.amount)
 }
 
-
 export default function ListOrderScreen (props) {
   const [isOpenFilterModal, setIsOpenFilterModal] = useState (false);
   const [isOpenFilter, setIsOpenFilter] = useState (false);
@@ -63,17 +62,28 @@ export default function ListOrderScreen (props) {
   const [enableKeyboard, setEnableKeyboard] = useState (true);
   const [data, setData] = useState(dataOrigin)
   const [amount, setAmount] = useState(0)
+  const [codeFilter, setCodeFilter] = useState ('');
+  const [nameFilter, setNameFilter] = useState ('');
   const ModalFilter = (props) => {
     return (
       <Modal
-        visible={props.visible}
-        onTouchOutside={() => props.handler (false)}
+        visible={isOpenFilter}
+        onTouchOutside={() => props.handler(false)}
         height={430}
         width={300}
         modalTitle={<ModalTitle title="Filter" />}
         footer={
           <ModalFooter>
-            <ModalButton text="OK" onPress={() => props.handler (false)} />
+            <ModalButton text="OK" onPress={() =>{
+              setIsOpenFilter(false)
+              let dataTemp = [...dataOrigin.tableData]
+              const newTableData = dataTemp.filter(item =>
+                item[0].toLowerCase().indexOf(codeFilter.toLowerCase()) !== -1 ||
+                item[1].toLowerCase().indexOf(nameFilter.toLowerCase()) !== -1 ||
+                item[3].toLowerCase().indexOf(amount+"") !== -1)
+
+              setData({...data, tableData: newTableData})
+            }} />
           </ModalFooter>
         }
       >
@@ -86,7 +96,8 @@ export default function ListOrderScreen (props) {
               backgroundColor: '#fff',
               paddingLeft: 10,
             }}
-            value=""
+            value={codeFilter}
+            onChange = {e => setCodeFilter(e)}
           />
           <Text style={{fontWeight: 'bold'}}>Customer Name</Text>
           <Input
@@ -96,7 +107,8 @@ export default function ListOrderScreen (props) {
               backgroundColor: '#fff',
               paddingLeft: 10,
             }}
-            value=""
+            value={nameFilter}
+            onChange = {e => setNameFilter(e)}
           />
           <Text style={{fontWeight: 'bold'}}>Amount</Text>
           <Input
@@ -106,16 +118,28 @@ export default function ListOrderScreen (props) {
               backgroundColor: '#fff',
               paddingLeft: 10,
             }}
-            value={amount + ""}
+            keyboardType='numeric'
+            value={amount}
+            onChange = {e => setAmount(e)}
           />
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <Button
-              icon={<Icon name="remove" size={20} color="blue" onPress={() => alert("-")}/>}
-              type="outline"
-            />
+
+            {
+              amount && amount > 0 ?
+              <Button
+                icon={<Icon name="remove" size={20} onPress={() => setAmount(amount-1)}/>}
+                type="outline"
+              /> :
+              <Button
+                disabled
+                icon={<Icon name="remove" size={20} onPress={() => setAmount(amount+1)}/>}
+                type="outline"
+              />
+            }
+
             <View style={{margin: 5}}></View>
             <Button
-              icon={<Icon name="add" size={20} color="blue" onPress={() => alert("+")} />}
+              icon={<Icon name="add" size={20} color="blue" onPress={() => setAmount(amount+1)} />}
               type="outline"
             />
           </View>
@@ -123,17 +147,25 @@ export default function ListOrderScreen (props) {
       </Modal>
     );
   }
-
   const handlerSearch = (value) => {
     setSearch(value)
-
     if (value.length > 0) {
-      let dataTemp = [...dataOrigin.tableData]
+      let dataTemp = [...data.tableData]
       const newTableData = dataTemp.filter(item => item[0].toLowerCase().indexOf(value.toLowerCase()) !== -1 || item[1].toLowerCase().indexOf(value.toLowerCase()) !== -1 || item[3].toLowerCase().indexOf(value.toLowerCase()) !== -1)
       setData({...data, tableData: newTableData})
     } else {
       setData(dataOrigin)
     }
+  }
+  const handlerFilter = (options) => {
+    let dataTemp = [...dataOrigin.tableData]
+    const {code, customerName, amount} = options
+    const newTableData = dataTemp.filter(item =>
+      item[0].toLowerCase().indexOf(code.toLowerCase()) !== -1 ||
+      item[1].toLowerCase().indexOf(customerName.toLowerCase()) !== -1 ||
+      item[3].toLowerCase().indexOf(amount+"") !== -1)
+
+    setData({...data, tableData: newTableData})
   }
 
   return (
@@ -228,7 +260,7 @@ export default function ListOrderScreen (props) {
                 marginTop: 6,
                 marginBottom: 6,
                 paddingLeft: 5,
-                marginRight: search.length > 0 ? 0 : 5,
+                // marginRight: search.length > 0 ? 0 : 5,
                 borderTopRightRadius: search.length > 0 ? 0 : 10,
                 borderBottomRightRadius: search.length > 0 ? 0 : 10,
               }}
@@ -243,7 +275,7 @@ export default function ListOrderScreen (props) {
                     <Icon
                       name="ios-close-circle"
                       type="ionicon"
-                      size={18}
+                      size={16}
                       color="#537372"
                     />
                   }
@@ -314,7 +346,10 @@ export default function ListOrderScreen (props) {
             textStyle={styles.text}
           />
           <ScrollView>
-            {data.tableData.map ((rowData, index) => (
+            {
+              data.tableData.length === 0 ?
+              <Text style={{textAlign: 'center', marginTop: 10}}>Không có dữ liệu</Text> :
+              data.tableData.map ((rowData, index) => (
               <TableWrapper
                 key={index}
                 style={
@@ -359,10 +394,7 @@ export default function ListOrderScreen (props) {
 
       </View>
       {isOpenFilterModal ? <BottomModal handlerScreen={props.handlerScreen} handlerStatus={props.handlerStatus}/> : <View />}
-      <ModalFilter
-        visible={isOpenFilter}
-        handler={value => setIsOpenFilter (value)}
-      />
+      <ModalFilter/>
     </View>
   );
 }

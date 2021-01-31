@@ -33,7 +33,7 @@ import {
 const data = {
   tableHead: [
     'Id',
-    'Nơi sản xuất',
+    'Nhà sản xuất',
     'Khách hàng',
     'Cty vận chuyển',
     'Số Lượng',
@@ -63,6 +63,25 @@ export default function StatisticalScreen (props) {
   const [screen, setScreen] = useState ('info');
   const [beginDate, setBeginDate] = useState ('');
   const [endDate, setEndDate] = useState ('');
+  const [dataObject, setDataObject] = useState({
+    name: "",
+    place: "",
+    dateMake: "",
+    customerName: "",
+    cty: "",
+    dateBuy: ""
+  })
+
+  const handlerClick = () => {
+    setDataObject({
+      name: "IT001",
+      place: "Noo PT",
+      dateMake: "01/10/2019",
+      customerName: "Trường Duy",
+      cty: "Đa cấp",
+      dateBuy: "01/01/2020"
+    })
+  }
 
   return (
     <View style={{flex: 1}}>
@@ -175,8 +194,10 @@ export default function StatisticalScreen (props) {
                       color: '#000',
                       marginTop: 13,
                     }}
+                    value={dataObject.name}
                     textAlign={'left'}
                     placeholder="*Tên sản phẩm"
+                    editable= {false}
                   />
 
                   <TextInput
@@ -189,6 +210,8 @@ export default function StatisticalScreen (props) {
                       color: '#000',
                       marginTop: 13,
                     }}
+                    editable= {false}
+                    value= {dataObject.place}
                     textAlign={'left'}
                     placeholder="*Nơi sản xuất"
                   />
@@ -203,6 +226,8 @@ export default function StatisticalScreen (props) {
                       color: '#000',
                       marginTop: 13,
                     }}
+                    editable= {false}
+                    value= {dataObject.dateMake}
                     textAlign={'left'}
                     placeholder="*Ngày sản xuất"
                   />
@@ -217,6 +242,8 @@ export default function StatisticalScreen (props) {
                       color: '#000',
                       marginTop: 13,
                     }}
+                    editable= {false}
+                    value= {dataObject.customerName}
                     textAlign={'left'}
                     placeholder="*Tên khách hàng"
                   />
@@ -231,6 +258,8 @@ export default function StatisticalScreen (props) {
                       color: '#000',
                       marginTop: 13,
                     }}
+                    editable= {false}
+                    value= {dataObject.cty}
                     textAlign={'left'}
                     placeholder="*Công ty vận chuyển"
                   />
@@ -245,6 +274,8 @@ export default function StatisticalScreen (props) {
                       color: '#000',
                       marginTop: 13,
                     }}
+                    editable= {false}
+                    value= {dataObject.dateBuy}
                     textAlign={'left'}
                     placeholder="*Ngày mua hàng"
                   />
@@ -326,6 +357,7 @@ export default function StatisticalScreen (props) {
                     titleStyle={{
                       color: '#fff',
                     }}
+                    onPress ={() => setScreen("chart")}
                   />
 
                   <Button
@@ -339,6 +371,7 @@ export default function StatisticalScreen (props) {
                     titleStyle={{
                       color: '#fff',
                     }}
+                    onPress ={() => props.handlerScreen("List")}
                   />
                 </View>
               </View>
@@ -406,8 +439,7 @@ export default function StatisticalScreen (props) {
                           <Cell
                             key={cellIndex}
                             data={cellData}
-                            onPress={() =>
-                              setIsOpenFilterModal (!isOpenFilterModal)}
+                            onPress={() => handlerClick()}
                             style={{
                               flex: 1,
                               paddingLeft: 5,
